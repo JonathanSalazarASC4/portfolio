@@ -2,6 +2,9 @@ import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Footer } from "../components/footer/footer";
+import { Nav } from "../components/nav/nav";
+import styles from "./layout.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +20,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} ${styles.body}`}>
+        <div style={{ paddingTop: 48 }}>
+          <Nav />
+        </div>
+        <div>{children}</div>
+        <div style={{ paddingBottom: 48 }}>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

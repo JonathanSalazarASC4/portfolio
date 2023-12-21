@@ -1,0 +1,13 @@
+.tab {
+  padding: 8px 16px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.activeTab {
+  background: #666;
+}
+
+.hoveredTab {
+  border-color: blue;
+}
