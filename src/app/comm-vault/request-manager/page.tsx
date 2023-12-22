@@ -14,7 +14,7 @@ const Page = () => {
 };
 
 const SCALE = 3;
-const ZOOM_DIMENSION = 400;
+const ZOOM_DIMENSION = 200;
 
 const SVGImageZoomer = ({ svg }: { svg: React.ReactNode }) => {
   const imageRef = React.useRef<HTMLDivElement | null>(null);
@@ -38,10 +38,10 @@ const SVGImageZoomer = ({ svg }: { svg: React.ReactNode }) => {
           }
           const rect = imageRef.current.getBoundingClientRect();
           setPosition({
-            imageX: pageX - rect.left - window.scrollX - ZOOM_DIMENSION / 2,
-            imageY: pageY - rect.top - window.scrollY - ZOOM_DIMENSION / 2,
-            pageX: pageX - window.scrollX - ZOOM_DIMENSION / 2,
-            pageY: pageY - window.scrollY - ZOOM_DIMENSION / 2,
+            imageX: pageX - rect.left - window.scrollX,
+            imageY: pageY - rect.top - window.scrollY,
+            pageX: pageX - window.scrollX,
+            pageY: pageY - window.scrollY,
           });
         }}
         onMouseLeave={() => {
@@ -63,17 +63,19 @@ const SVGImageZoomer = ({ svg }: { svg: React.ReactNode }) => {
             width: ZOOM_DIMENSION,
             height: ZOOM_DIMENSION,
             position: "fixed",
-            left: position.pageX,
-            top: position.pageY,
+            left: position.pageX - ZOOM_DIMENSION / 2,
+            top: position.pageY - ZOOM_DIMENSION / 2,
             pointerEvents: "none",
 
-            backgroundPositionX: -position.imageX * SCALE,
-            backgroundPositionY: -position.imageY * SCALE,
+            backgroundPositionX: -position.imageX * SCALE + ZOOM_DIMENSION / 2,
+            backgroundPositionY: -position.imageY * SCALE + ZOOM_DIMENSION / 2,
             backgroundRepeat: "no-repeat",
 
             backgroundSize: `${addRequestFlowSVG.width * SCALE}px ${
               addRequestFlowSVG.height * SCALE
             }px`,
+            borderRadius: 16,
+            border: "2px solid white",
           }}
         />
       ) : null}
